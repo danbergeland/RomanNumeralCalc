@@ -37,6 +37,10 @@ class TranslateLXXto70(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('LXX')==70
         
+class TranslateCXCto190(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('CXC')==190
+        
 class IIVfailsDoubleSubtraction(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('IIV')==-1
@@ -72,3 +76,11 @@ class DDfails5Repitition(CalculatorSetup):
 class IIIIfailsMoreThan3Repitition(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('IIII')==-1
+        
+class CCCCfailsMoreThan3Repitition(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('CCCC')==-1
+        
+class ILfailsValidSubtraction(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('IL') == -1

@@ -43,6 +43,8 @@ class Calculator:
             checkPassed = self.checkFiveBasedSubtraction()
         if checkPassed:
             checkPassed = self.checkMoreThan3Repetition()
+        if checkPassed:
+            checkPassed = self.checkValidSubtraction()
         
         if not checkPassed:
             self.arabic = -1
@@ -53,20 +55,16 @@ class Calculator:
     def checkSingleSubtraction(self):
         iiIndex = self.roman.find('II')
         xxIndex = self.roman.find('XX')
-        ccIndex = self.roman.find('CC')
-        
+        ccIndex = self.roman.find('CC')       
         checkPassed = True
         if iiIndex>-1:
             checkPassed = self.checkNumeralsForGreaterFollowerNumeral(iiIndex, numeral.Numeral('I'))
         if xxIndex>-1 and checkPassed:
             checkPassed = self.checkNumeralsForGreaterFollowerNumeral(xxIndex, numeral.Numeral('X'))
         if ccIndex>-1 and checkPassed:
-            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(ccIndex, numeral.Numeral('C'))
-            
+            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(ccIndex, numeral.Numeral('C')) 
         return checkPassed
-                   
-         
-            
+          
     def checkFiveBasedSubtraction(self):
         checkPassed = True
         fiveBasedNumbers = ['V','L','D']
@@ -82,6 +80,16 @@ class Calculator:
             if self.roman.find(str)>-1:
                 return False
         return True
+    
+    def checkValidSubtraction(self):
+        dictValidFollowers = {'I':['I','V','X'],'X':['I','V','X','L','C'],'C':['I','V','X','L','C','D','M']}
+        checkPassed = True
+        for num in dictValidFollowers:
+            index = self.roman.find(num)
+            if index > -1 and index+1 < len(self.roman):
+                checkPassed = self.roman[index+1] in dictValidFollowers[num]
+        return checkPassed
+
                 
     def checkNumeralsForGreaterFollowerNumeral(self,startIndex,numeral):
         for num in self.numerals[startIndex:]:
@@ -93,5 +101,7 @@ class Calculator:
         for num in self.numerals[startIndex+1:]:
             if num.value >= numeral.value:
                 return False
-        return True                
+        return True
+    
+        
                 
