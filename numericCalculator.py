@@ -39,6 +39,9 @@ class Calculator:
     def checkRomanNumeralGrammer(self):
         checkPassed = True
         checkPassed = self.checkSingleSubtraction()
+        if checkPassed:
+            checkPassed = self.checkFiveBasedSubtraction()
+        
         if not checkPassed:
             self.arabic = -1
             self.roman = ''
@@ -52,18 +55,34 @@ class Calculator:
         
         checkPassed = True
         if iiIndex>-1:
-            checkPassed = self.checkNumeralsForHigherFollowerNumeral(iiIndex, numeral.Numeral('I'))
+            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(iiIndex, numeral.Numeral('I'))
         if xxIndex>-1 and checkPassed:
-            checkPassed = self.checkNumeralsForHigherFollowerNumeral(xxIndex, numeral.Numeral('X'))
+            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(xxIndex, numeral.Numeral('X'))
         if ccIndex>-1 and checkPassed:
-            checkPassed = self.checkNumeralsForHigherFollowerNumeral(startIndex, numeral.Numeral('C'))
+            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(ccIndex, numeral.Numeral('C'))
             
         return checkPassed
                    
-    def checkNumeralsForHigherFollowerNumeral(self,startIndex,numeral):
+         
+            
+    def checkFiveBasedSubtraction(self):
+        checkPassed = True
+        fiveBasedNumbers = ['V','L','D']
+        for num in fiveBasedNumbers:
+            index = self.roman.find(num)
+            if index > -1:
+                checkPassed = self.checkNumeralsForGTEFollowerNumerals(index, numeral.Numeral(num))
+        return checkPassed
+                
+    def checkNumeralsForGreaterFollowerNumeral(self,startIndex,numeral):
         for num in self.numerals[startIndex:]:
             if num.value > numeral.value:
                 return False
-        return True                 
-            
+        return True                
+    
+    def checkNumeralsForGTEFollowerNumerals(self,startIndex,numeral):
+        for num in self.numerals[startIndex+1:]:
+            if num.value >= numeral.value:
+                return False
+        return True                
                 

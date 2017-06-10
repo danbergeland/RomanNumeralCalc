@@ -40,3 +40,11 @@ class TranslateLXXto70(CalculatorSetup):
 class IIVfailsDoubleSubtraction(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('IIV')==-1
+        
+class CCMfailsDoubleSubtraction(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('CCM')==-1
+        
+class VXfails5Subtraction(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('VX')==-1
