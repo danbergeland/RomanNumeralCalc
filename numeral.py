@@ -2,7 +2,7 @@
 
 class Numeral:
     
-    dictNumeralValues = {'I':1,'V':5}
+    dictNumeralValues = {'I':1,'V':5, 'X':10}
     
     def __init__(self,numeralLetter):
         self.letter = numeralLetter

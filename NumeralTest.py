@@ -28,3 +28,15 @@ class NumeralVLetterisV(NumeralVLetterCaseSetup):
 class NumeralVValueis5(NumeralVLetterCaseSetup):
     def runTest(self):
         assert self.numeral.value == 5
+
+class NumeralXLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('X')
+
+class NumeralXLetterisX(NumeralXLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'X'
+        
+class NumeralXValueis10(NumeralXLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 10
