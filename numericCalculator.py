@@ -8,8 +8,8 @@ class Calculator:
         
     def roman2arabic(self,romanLetters):
         self.roman = romanLetters
-        self.parseRoman()
-        if self.checkRomanNumeralGrammer():
+        if self.checkRomanNumeralGrammer():        
+            self.parseRoman()
             self.evaluateNumerals()
         return self.arabic
     
@@ -20,20 +20,23 @@ class Calculator:
     
     def parseRoman(self):
         self.numerals = []
-        for letter in self.roman:
-            self.numerals.append(numeral.Numeral(letter))
+        #check for subtractions by creating with pairs at each index
+        
+        for numPairs in numeral.Numeral.listValidSubtractions:
+            splitLetters = self.roman.split(sep=numPairs, maxsplit=1)
+            if len(splitLetters)> 1:
+                self.numerals.append(numeral.Numeral(numPairs))
+            self.roman = ''.join(splitLetters)
+        #Now that subs are removed, add the remaining numerals        
+        for l in self.roman:
+            self.numerals.append(numeral.Numeral(l))
+        #sort them, so they should appear in C, XC, X... descending order
+        self.numerals.sort(reverse=True)
             
     def evaluateNumerals(self):
         tempSum = 0
-        for i in range(len(self.numerals)):
-            numeral = self.numerals[i]
-            if i==0:
-                tempSum += numeral.value
-            else:
-                if(numeral.value<=self.numerals[i-1].value): 
-                    tempSum += numeral.value
-                else:
-                    tempSum = numeral.value - tempSum
+        for num in self.numerals:
+            tempSum += num.value
         self.arabic = tempSum
         
     def checkRomanNumeralGrammer(self):
@@ -58,11 +61,11 @@ class Calculator:
         ccIndex = self.roman.find('CC')       
         checkPassed = True
         if iiIndex>-1:
-            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(iiIndex, numeral.Numeral('I'))
+            checkPassed = self.checkFollowingNumeralsLessThanEqual(iiIndex, numeral.Numeral('I'))
         if xxIndex>-1 and checkPassed:
-            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(xxIndex, numeral.Numeral('X'))
+            checkPassed = self.checkFollowingNumeralsLessThanEqual(xxIndex, numeral.Numeral('X'))
         if ccIndex>-1 and checkPassed:
-            checkPassed = self.checkNumeralsForGreaterFollowerNumeral(ccIndex, numeral.Numeral('C')) 
+            checkPassed = self.checkFollowingNumeralsLessThanEqual(ccIndex, numeral.Numeral('C')) 
         return checkPassed
           
     def checkFiveBasedSubtraction(self):
@@ -71,7 +74,7 @@ class Calculator:
         for num in fiveBasedNumbers:
             index = self.roman.find(num)
             if index > -1:
-                checkPassed = self.checkNumeralsForGTEFollowerNumerals(index, numeral.Numeral(num))
+                checkPassed = self.checkFollowingNumeralsLessThan(index, numeral.Numeral(num))
         return checkPassed
     
     def checkMoreThan3Repetition(self):
@@ -91,15 +94,17 @@ class Calculator:
         return checkPassed
 
                 
-    def checkNumeralsForGreaterFollowerNumeral(self,startIndex,numeral):
-        for num in self.numerals[startIndex:]:
-            if num.value > numeral.value:
+    def checkFollowingNumeralsLessThanEqual(self,startIndex,numer):
+        for letter in self.roman[startIndex:]:
+            num = numeral.Numeral(letter)
+            if num.value > numer.value:
                 return False
         return True                
     
-    def checkNumeralsForGTEFollowerNumerals(self,startIndex,numeral):
-        for num in self.numerals[startIndex+1:]:
-            if num.value >= numeral.value:
+    def checkFollowingNumeralsLessThan(self,startIndex,numer):
+        for letter in self.roman[startIndex+1:]:
+            num = numeral.Numeral(letter)
+            if num.value >= numer.value:
                 return False
         return True
     

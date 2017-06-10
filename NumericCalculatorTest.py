@@ -84,3 +84,4 @@ class CCCCfailsMoreThan3Repitition(CalculatorSetup):
 class ILfailsValidSubtraction(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('IL') == -1
+        
