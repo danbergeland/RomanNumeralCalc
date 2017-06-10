@@ -48,3 +48,23 @@ class CCMfailsDoubleSubtraction(CalculatorSetup):
 class VXfails5Subtraction(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('VX')==-1
+        
+class LCfails5Subtraction(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('LC')==-1
+        
+class DMfails5Subtraction(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('DM')==-1
+    
+class VVfails5Repetition(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('VV')==-1
+
+class LLfails5Reptition(CalculatorSetup):
+    def runTest(self):
+        assert  self.calc.roman2arabic('LL')==-1
+        
+class DDfails5Repitition(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('DD')==-1
