@@ -8,3 +8,7 @@ class CalculatorSetup(unittest.TestCase):
 class TranslateIto1(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('I')==1
+        
+class Translate1toI(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.arabic2roman(1)=='I'

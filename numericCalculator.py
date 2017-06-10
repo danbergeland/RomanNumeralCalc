@@ -9,3 +9,8 @@ class Calculator:
         self.roman = romanLetters
         self.arabic = 1
         return self.arabic
+    
+    def arabic2roman(self,arabicNumber):
+        self.arabic = arabicNumber
+        self.roman = 'I'
+        return self.roman
