@@ -85,3 +85,14 @@ class ILfailsValidSubtraction(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('IL') == -1
         
+class Translate2toII(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.arabic2roman(2) == 'II'
+        
+class Translate1900toMCM(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.arabic2roman(1900)=='MCM'
+        
+class Translate1800toMDCCC(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.arabic2roman(1800)=='MDCCC'

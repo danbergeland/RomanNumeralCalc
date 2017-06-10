@@ -15,13 +15,20 @@ class Calculator:
     
     def arabic2roman(self,arabicNumber):
         self.arabic = arabicNumber
-        self.roman = 'I'
+        if(self.arabic > 0):
+            self.generateRomanNumerals()
         return self.roman
+    
+    
+    '''
+    
+    ROMAN 2 ARABIC FUNCTIONS
+    
+    '''    
     
     def parseRoman(self):
         self.numerals = []
         #check for subtractions by creating with pairs at each index
-        
         for numPairs in numeral.Numeral.listValidSubtractions:
             splitLetters = self.roman.split(sep=numPairs, maxsplit=1)
             if len(splitLetters)> 1:
@@ -107,6 +114,25 @@ class Calculator:
             if num.value >= numer.value:
                 return False
         return True
+    '''
     
+    ARABIC 2 ROMAN Functions
+    
+    '''
+    def generateRomanNumerals(self):
+        self.roman = ''
+        self.numerals = []
+        remainingNumber = self.arabic
         
-                
+        listDescendingNumerals = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I']
+        
+        #Go get the largest numeral/subtraction pair, and subtract it from the temp
+        while remainingNumber > 0:
+            for num in listDescendingNumerals:
+                if remainingNumber >= numeral.Numeral.dictNumeralValues[num]:
+                    self.numerals.append(numeral.Numeral(num))
+                    remainingNumber -= numeral.Numeral.dictNumeralValues[num]
+                    break
+
+        for num in self.numerals:
+            self.roman += num.letter
