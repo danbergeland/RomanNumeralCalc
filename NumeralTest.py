@@ -40,3 +40,15 @@ class NumeralXLetterisX(NumeralXLetterCaseSetup):
 class NumeralXValueis10(NumeralXLetterCaseSetup):
     def runTest(self):
         assert self.numeral.value == 10
+        
+class NumeralLLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('L')
+        
+class NumeralLletterisL(NumeralLLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'L'
+
+class NumeralLvalueis50(NumeralLLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 50
