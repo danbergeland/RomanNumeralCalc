@@ -5,14 +5,26 @@ class UnittestTestCase(unittest.TestCase):
     def runTest(self):
         assert True
     
-class NumeralTestCaseSetup(unittest.TestCase):
+class NumeralITestCaseSetup(unittest.TestCase):
     def setUp(self):
         self.numeral_ = numeral.Numeral('I')
         
-class NumeralLetterIisI(NumeralTestCaseSetup):
+class NumeralILetterisI(NumeralITestCaseSetup):
     def runTest(self):
         assert self.numeral_.letter == 'I'
         
-class NumeralValueIis1(NumeralTestCaseSetup):
+class NumeralIValueis1(NumeralITestCaseSetup):
     def runTest(self):
         assert self.numeral_.value == 1
+
+class NumeralVLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('V')
+        
+class NumeralVLetterisV(NumeralVLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'V'
+        
+class NumeralVValueis5(NumeralVLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 5
