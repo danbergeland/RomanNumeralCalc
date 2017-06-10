@@ -52,3 +52,40 @@ class NumeralLletterisL(NumeralLLetterCaseSetup):
 class NumeralLvalueis50(NumeralLLetterCaseSetup):
     def runTest(self):
         assert self.numeral.value == 50
+        
+class NumeralCLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('C')
+        
+class NumeralCLetterisC(NumeralCLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'C'
+        
+class NumeralCvalueis100(NumeralCLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 100
+        
+class NumeralDLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('D')
+        
+class NumeralDLetterisD(NumeralDLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'D'
+        
+class NumeralDvalueis500(NumeralDLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 500
+        
+class NumeralMLetterCaseSetup(unittest.TestCase):
+    def setUp(self):
+        self.numeral = numeral.Numeral('M')
+        
+class NumeralMLetterisM(NumeralMLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.letter == 'M'
+        
+class NumeralCvalueis1000(NumeralMLetterCaseSetup):
+    def runTest(self):
+        assert self.numeral.value == 1000
+        
