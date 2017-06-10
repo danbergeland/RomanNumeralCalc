@@ -68,3 +68,7 @@ class LLfails5Reptition(CalculatorSetup):
 class DDfails5Repitition(CalculatorSetup):
     def runTest(self):
         assert self.calc.roman2arabic('DD')==-1
+        
+class IIIIfailsMoreThan3Repitition(CalculatorSetup):
+    def runTest(self):
+        assert self.calc.roman2arabic('IIII')==-1

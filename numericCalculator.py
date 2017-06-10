@@ -41,6 +41,8 @@ class Calculator:
         checkPassed = self.checkSingleSubtraction()
         if checkPassed:
             checkPassed = self.checkFiveBasedSubtraction()
+        if checkPassed:
+            checkPassed = self.checkMoreThan3Repetition()
         
         if not checkPassed:
             self.arabic = -1
@@ -73,6 +75,13 @@ class Calculator:
             if index > -1:
                 checkPassed = self.checkNumeralsForGTEFollowerNumerals(index, numeral.Numeral(num))
         return checkPassed
+    
+    def checkMoreThan3Repetition(self):
+        forbiddenStrings = ['IIII','XXXX','CCCC','MMMM']
+        for str in forbiddenStrings:
+            if self.roman.find(str)>-1:
+                return False
+        return True
                 
     def checkNumeralsForGreaterFollowerNumeral(self,startIndex,numeral):
         for num in self.numerals[startIndex:]:
