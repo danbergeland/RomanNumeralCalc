@@ -1,5 +1,5 @@
 # RomanNumeralCalc
-Python - Roman Numeral Calculator Kata
+Python - Roman Numeral Converter Kata
 
 Requirements found here : http://agilekatas.co.uk/katas/romannumerals-kata
 
